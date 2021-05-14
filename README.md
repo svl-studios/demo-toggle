@@ -4,6 +4,8 @@ This plugin adds a toggle to the website to display an array of images represent
 
 The array of demo blocks is set using shortcodes.  For simplicity, these can be set via the WPBakery Page Builder modules.  Or, if you're savvy, manually using the format shown below.
 
+Once the shortcodes have been added, the data will automataically be added to the flyout toggle on the page.  Simply put, set your shortcodes and the plugin does the rest!
+
 ## Container Shortcode
 **[svl_demos theme="Theme Name" purchase_link="https://www.url-to-purchase-site.com" display_toggle="yes"]**
 
