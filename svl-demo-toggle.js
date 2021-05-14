@@ -1,5 +1,14 @@
 /* global jQuery, svlDemoOptions */
 
+/**
+ * If you're reading this, then perhaps you're trying to figure out how I put this demo site together with the
+ * demo blocks and flyout toggle.  Don't go to all the trouble of piecing it together via this JavaScript and HTML.
+ * I put this demo toggle code into a GitHub repository.  You're welcome to fork it, modify it, use it, whatever.
+ * I only ask you leave this message, the repository link, and the credits intact.
+ *
+ * - Kev
+ */
+
 ( function( $ ) {
 	var adjustWrap;
 	var pageID;

@@ -73,6 +73,7 @@ if ( ! class_exists( 'Svl_Demo_Toggle' ) ) {
 				'svlDemoOptions',
 				array(
 					'baseURL' => home_url(),
+					'pageID'  => get_the_ID(),
 				)
 			);
 		}
