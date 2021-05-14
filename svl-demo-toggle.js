@@ -6,6 +6,10 @@
  * I put this demo toggle code into a GitHub repository.  You're welcome to fork it, modify it, use it, whatever.
  * I only ask you leave this message, the repository link, and the credits intact.
  *
+ * https://github.com/svl-studios/svl-demo-toggle
+ *
+ * Enjoy!
+ *
  * - Kev
  */
 
