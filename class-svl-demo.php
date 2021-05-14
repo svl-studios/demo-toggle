@@ -184,7 +184,7 @@ if ( ! class_exists( 'Svl_Demo' ) ) {
 			}
 
 			$html .= '			<img src="' . esc_url( $demo_image ) . '">';
-			$html .= '			<a target="_blank" href="' . esc_url( $demo_url ) . '" class="title-link">';
+			$html .= '			<a target="' . esc_attr( $link_target ) . '" href="' . esc_url( $demo_url ) . '" class="title-link">';
 			$html .= '				<h4>' . esc_html( $demo_title ) . '</h4>';
 			$html .= '			</a>';
 

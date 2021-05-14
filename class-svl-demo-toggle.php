@@ -55,14 +55,14 @@ if ( ! class_exists( 'Svl_Demo_Toggle' ) ) {
 		public function enqueue() {
 			wp_enqueue_style(
 				'svl-demo-toggle',
-				plugin_dir_url( __FILE__ ) . '/demo-toggle.css',
+				plugin_dir_url( __FILE__ ) . '/svl-demo-toggle.css',
 				array(),
 				'1.0.0'
 			);
 
 			wp_enqueue_script(
 				'svl-demo-toggle',
-				plugin_dir_url( __FILE__ ) . '/demo-toggle.js',
+				plugin_dir_url( __FILE__ ) . '/svl-demo-toggle.js',
 				array(),
 				'1.0.0',
 				true
