@@ -56,6 +56,34 @@ if ( ! class_exists( 'Svl_Demos' ) ) {
 		public $overlay_color = '';
 
 		/**
+		 * New Banner Color.
+		 *
+		 * @var string
+		 */
+		public $new_color = '';
+
+		/**
+		 * New Banner Text Color.
+		 *
+		 * @var string
+		 */
+		public $new_text_color = '';
+
+		/**
+		 * Coming Soon Banner Color.
+		 *
+		 * @var string
+		 */
+		public $coming_soon_color = '';
+
+		/**
+		 * Coming Soon Banner Text Color.
+		 *
+		 * @var string
+		 */
+		public $coming_soon_text_color = '';
+
+		/**
 		 * Requite_Social_Icons constructor.
 		 */
 		public function __construct() {
@@ -82,12 +110,12 @@ if ( ! class_exists( 'Svl_Demos' ) ) {
 						'params'                  => array(
 							array(
 								'type'       => 'textfield',
-								'heading'    => esc_html__( 'Theme Name', 'svl-demos' ),
+								'heading'    => esc_html__( 'Theme Name.', 'svl-demos' ),
 								'param_name' => 'theme',
 							),
 							array(
 								'type'       => 'textfield',
-								'heading'    => esc_html__( 'Purchase URL', 'svl-demos' ),
+								'heading'    => esc_html__( 'Purchase URL.', 'svl-demos' ),
 								'param_name' => 'purchase_link',
 							),
 							array(
@@ -105,24 +133,42 @@ if ( ! class_exists( 'Svl_Demos' ) ) {
 								'description' => esc_html__( 'Randomize the demo black order.', 'svl-demos' ),
 								'value'       => array( esc_html__( 'Randomize', 'svl_demos' ) => 'yes' ),
 								'std'         => 'yes',
+								'group'      => esc_html('Randomize', 'svl-demos'),
 							),
 							array(
 								'type'       => 'textfield',
-								'heading'    => esc_html__( 'Randomize interval (in seconds)', 'svl-demos' ),
+								'heading'    => esc_html__( 'Randomize interval (in seconds).', 'svl-demos' ),
 								'param_name' => 'rand_interval',
 								'value'      => '60',
+								'group'      => esc_html('Randomize', 'svl-demos'),
 							),
 							array(
 								'type'       => 'colorpicker',
-								'heading'    => esc_html__( 'Primary color (links and buttons)', 'svl-demos' ),
+								'heading'    => esc_html__( 'Primary color (links and buttons).', 'svl-demos' ),
 								'param_name' => 'primary_color',
 								'value'      => '#82b440',
+								'group'      => esc_html('Colors', 'svl-demos'),
 							),
 							array(
 								'type'       => 'colorpicker',
-								'heading'    => esc_html__( 'Primary color (links and buttons)', 'svl-demos' ),
+								'heading'    => esc_html__( 'Demo block overlay color.', 'svl-demos' ),
 								'param_name' => 'overlay_color',
 								'value'      => '#2b2b2b',
+								'group'      => esc_html('Colors', 'svl-demos'),
+							),
+							array(
+								'type'       => 'colorpicker',
+								'heading'    => esc_html__( 'Demo block "New" banner color.', 'svl-demos' ),
+								'param_name' => 'new_color',
+								'value'      => '#fa2222',
+								'group'      => esc_html('Colors', 'svl-demos'),
+							),
+							array(
+								'type'       => 'colorpicker',
+								'heading'    => esc_html__( 'Demo block "Coming Soon" banner color.', 'svl-demos' ),
+								'param_name' => 'coming_soon_color',
+								'value'      => '#82b440',
+								'group'      => esc_html('Colors', 'svl-demos'),
 							),
 						),
 					)
@@ -174,21 +220,27 @@ if ( ! class_exists( 'Svl_Demos' ) ) {
 		 */
 		public function shortcode( $atts = '', $content = null ): string {
 			$arr = array(
-				'theme'          => '',
-				'purchase_link'  => '',
-				'display_toggle' => 'yes',
-				'randomize'      => 'yes',
-				'rand_interval'  => '60',
-				'primary_color'  => '#82b440',
-				'overlay_color'  => '#2b2b2b',
+				'theme'             => '',
+				'purchase_link'     => '',
+				'display_toggle'    => 'yes',
+				'randomize'         => 'yes',
+				'rand_interval'     => '60',
+				'primary_color'     => '#82b440',
+				'overlay_color'     => '#2b2b2b',
+				'new_color'         => '#fa2222',
+				'coming_soon_color' => '#82b440',
 			);
 
 			// phpcs:ignore WordPress.PHP.DontExtract
 			extract( shortcode_atts( $arr, $atts ) );
 
-			$this->primary_color     = $primary_color;
-			$this->contrasting_color = $this->contrasting_color( $primary_color, '#000000', '#ffffff' );
-			$this->overlay_color     = $overlay_color;
+			$this->primary_color          = $primary_color;
+			$this->contrasting_color      = $this->contrasting_color( $primary_color, '#000000', '#ffffff' );
+			$this->overlay_color          = $overlay_color;
+			$this->new_color              = $new_color;
+			$this->new_text_color         = $this->contrasting_color( $new_color );
+			$this->coming_soon_color      = $coming_soon_color;
+			$this->coming_soon_text_color = $this->contrasting_color( $coming_soon_color );
 
 			if ( 'yes' === $display_toggle ) {
 				$this->theme        = $theme;

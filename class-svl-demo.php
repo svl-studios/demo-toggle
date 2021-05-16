@@ -195,7 +195,7 @@ if ( ! class_exists( 'Svl_Demo' ) ) {
 			$html .= '			</a>';
 
 			if ( 'yes' === $new ) {
-				$html .= '<span class="new-demo">NEW!</span>';
+				$html .= '<span style="color:' . esc_attr( $svl_demos->new_text_color ) . ';background-color:' . esc_attr( $svl_demos->new_color ) . ';" class="new-demo">NEW!</span>';
 			}
 
 			$html .= '			<span class="svl-builder ' . esc_attr( $builder_used ) . '">';
@@ -204,7 +204,7 @@ if ( ! class_exists( 'Svl_Demo' ) ) {
 			$html .= '		</div>';
 			$html .= '	</div>';
 
-			$html .= '<style>.btn-primary{border-color:' . esc_attr( $primary_color ) . ';}</style>';
+			$html .= '<style>.svl-coming-soon .demo-wrap::after{color:' . esc_attr( $svl_demos->coming_soon_text_color ) . ';background-color:' . esc_attr( $svl_demos->coming_soon_color ) . ';}.btn-primary{border-color:' . esc_attr( $primary_color ) . ';}</style>';
 
 			return $html;
 		}
