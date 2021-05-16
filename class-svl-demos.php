@@ -11,6 +11,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use SVL\PHPColors\Color;
+
 if ( ! class_exists( 'Svl_Demos' ) ) {
 
 	/**
@@ -31,6 +33,27 @@ if ( ! class_exists( 'Svl_Demos' ) ) {
 		 * @var string
 		 */
 		private $purchase_url = '';
+
+		/**
+		 * Primary Color.
+		 *
+		 * @var string
+		 */
+		public $primary_color = '';
+
+		/**
+		 * Contrasting Color.
+		 *
+		 * @var string
+		 */
+		public $contrasting_color = '';
+
+		/**
+		 * Overlay Color.
+		 *
+		 * @var string
+		 */
+		public $overlay_color = '';
 
 		/**
 		 * Requite_Social_Icons constructor.
@@ -75,6 +98,32 @@ if ( ! class_exists( 'Svl_Demos' ) ) {
 								'value'       => array( esc_html__( 'Toggle', 'svl_demos' ) => 'yes' ),
 								'std'         => 'yes',
 							),
+							array(
+								'type'        => 'checkbox',
+								'heading'     => '',
+								'param_name'  => 'randomize',
+								'description' => esc_html__( 'Randomize the demo black order.', 'svl-demos' ),
+								'value'       => array( esc_html__( 'Randomize', 'svl_demos' ) => 'yes' ),
+								'std'         => 'yes',
+							),
+							array(
+								'type'       => 'textfield',
+								'heading'    => esc_html__( 'Randomize interval (in seconds)', 'svl-demos' ),
+								'param_name' => 'rand_interval',
+								'value'      => '60',
+							),
+							array(
+								'type'       => 'colorpicker',
+								'heading'    => esc_html__( 'Primary color (links and buttons)', 'svl-demos' ),
+								'param_name' => 'primary_color',
+								'value'      => '#82b440',
+							),
+							array(
+								'type'       => 'colorpicker',
+								'heading'    => esc_html__( 'Primary color (links and buttons)', 'svl-demos' ),
+								'param_name' => 'overlay_color',
+								'value'      => '#2b2b2b',
+							),
 						),
 					)
 				);
@@ -85,30 +134,40 @@ if ( ! class_exists( 'Svl_Demos' ) ) {
 		 * Add the demo toggler code to the footer of the page.
 		 */
 		public function add_demo_toggle() {
+			$shadow_color = new Color( $this->primary_color );
+
 			?>
-			<div data-id="<?php echo intval( get_the_ID() ); ?>" data-theme="<?php echo esc_attr( $this->theme ); ?>" class='svl-demo-select-wrap init-onload' >
-				<span href = '#' class='svl-demo-toggle' >
-					<i class='fa fa-plus' ></i > DEMOS
-				</span >
-				<div class='svl-demos-info-box' >
-					<div class='buy-now-btn' >
-						<a href="<?php echo esc_url( $this->purchase_url ); ?>" > Purchase <?php echo esc_html( $this->theme ); ?> </a >
-					</div >
-					<span class='demos-count' ></span >
-					<span class='svl-more-demos-text' > Loading Demos </span >
-				</div >
-				<div class='svl-demo-window' >
-					<i class='loading-demos fa fa-spin fa-refresh' ></i >
-					<ul style = 'height: 376px;' ></ul >
-				</div >
-			</div >
-			<?php
+			<div data-id="<?php echo intval( get_the_ID() ); ?>" data-hover_color="<?php esc_attr( $this->primary_color ); ?>"
+					data-theme="<?php echo esc_attr( $this->theme ); ?>" class='svl-demo-select-wrap init-onload'>
+				<span href='#' class='svl-demo-toggle'>
+					<i class='fa fa-plus'></i> DEMOS
+				</span>
+				<div class='svl-demos-info-box'>
+					<div class='buy-now-btn'>
+						<a style="box-shadow:0 2px 0 #<?php echo esc_attr( $shadow_color->darken() ); ?>;color:<?php echo esc_attr( $this->contrasting_color ); ?>!important;background-color:<?php echo esc_attr( $this->primary_color ); ?>" href="<?php echo esc_url( $this->purchase_url ); ?>">
+							Purchase <?php echo esc_html( $this->theme ); ?> </a>
+					</div>
+					<span class='demos-count'></span>
+					<span class='svl-more-demos-text'> Loading Demos </span>
+				</div>
+				<div class='svl-demo-window'>
+					<i class='loading-demos fa fa-spin fa-refresh'></i>
+					<ul style='height: 376px;'></ul>
+				</div>
+			</div>
+
+			<?php if ( '' !== $this->primary_color ) { ?>
+				<style>
+					.svl-demo-toggle:hover{color: <?php echo esc_attr( $this->primary_color ); ?> !important;}
+				</style>
+				<?php
+			}
 		}
 
 		/**
 		 * Shortcode.
 		 *
-		 * @param array $atts Attributes.
+		 * @param array $atts    Attributes.
 		 * @param null  $content Content.
 		 *
 		 * @return string
@@ -118,10 +177,18 @@ if ( ! class_exists( 'Svl_Demos' ) ) {
 				'theme'          => '',
 				'purchase_link'  => '',
 				'display_toggle' => 'yes',
+				'randomize'      => 'yes',
+				'rand_interval'  => '60',
+				'primary_color'  => '#82b440',
+				'overlay_color'  => '#2b2b2b',
 			);
 
 			// phpcs:ignore WordPress.PHP.DontExtract
 			extract( shortcode_atts( $arr, $atts ) );
+
+			$this->primary_color     = $primary_color;
+			$this->contrasting_color = $this->contrasting_color( $primary_color, '#000000', '#ffffff' );
+			$this->overlay_color     = $overlay_color;
 
 			if ( 'yes' === $display_toggle ) {
 				$this->theme        = $theme;
@@ -130,15 +197,40 @@ if ( ! class_exists( 'Svl_Demos' ) ) {
 				add_action( 'wp_footer', array( $this, 'add_demo_toggle' ) );
 			}
 
-			$output  = '<div class="svl-demos" style="visibility: visible;">';
+			$rand_interval = intval( $rand_interval ) * 1000;
+
+			$output  = '<div data-interval="' . intval( $rand_interval ) . '" data-randomize="' . esc_attr( $randomize ) . '" class="svl-demos" style="visibility: visible;">';
 			$output .= do_shortcode( $content );
 			$output .= '</div>';
 
 			return $output;
 		}
+
+		/**
+		 * Contrasting color.
+		 *
+		 * @param string $hexcolor Hex color.
+		 * @param string $dark Dark value.
+		 * @param string $light Light value.
+		 *
+		 * @return string
+		 */
+		private function contrasting_color( string $hexcolor, string $dark = '#000000', string $light = '#FFFFFF' ):string {
+			$hexcolor = str_replace( $hexcolor, '', '#' );
+
+			$r = hexdec( substr( $hexcolor, 1, 2 ) );
+			$g = hexdec( substr( $hexcolor, 3, 2 ) );
+			$b = hexdec( substr( $hexcolor, 5, 2 ) );
+
+			$yiq = ( ( $r * 299 ) + ( $g * 587 ) + ( $b * 114 ) ) / 1000;
+
+			return ( $yiq >= 128 ) ? $dark : $light;
+		}
 	}
 
-	new Svl_Demos();
+	global $svl_demos;
+
+	$svl_demos = new Svl_Demos();
 
 	if ( class_exists( 'WPBakeryShortCodesContainer' ) ) {
 

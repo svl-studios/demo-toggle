@@ -133,6 +133,8 @@ if ( ! class_exists( 'Svl_Demo' ) ) {
 		 * @return string
 		 */
 		public function shortcode( $atts = '', $content = null ): string {
+			global $svl_demos;
+
 			$arr = array(
 				'demo_title'        => '',
 				'demo_url'          => '',
@@ -175,12 +177,16 @@ if ( ! class_exists( 'Svl_Demo' ) ) {
 
 			$slug = strtolower( str_replace( ' ', '-', $demo_title ) );
 
+			$primary_color     = $svl_demos->primary_color;
+			$contrasting_color = $svl_demos->contrasting_color;
+			$overlay_color     = $svl_demos->overlay_color;
+
 			$html  = '    <div class="col-xs-6 col-sm-4 col-md-3 demo-block ' . esc_attr( $slug ) . ' ' . esc_attr( $coming_soon ) . '">';
 			$html .= '		<div class="demo-wrap">';
 
 			if ( '' === $coming_soon ) {
-				$html .= '			<a target="_blank" href="' . esc_url( $demo_url ) . '" class="overlay"></a>';
-				$html .= '			<a target="_blank" href="' . esc_url( $demo_url ) . '" class="svl-button button btn-primary no-hover">View Demo</a>';
+				$html .= '			<a target="_blank" href="' . esc_url( $demo_url ) . '" style="background-color:' . esc_attr( $overlay_color ) . ';" class="overlay"></a>';
+				$html .= '			<a target="_blank" href="' . esc_url( $demo_url ) . '" style="color:' . esc_attr( $contrasting_color ) . ';background-color:' . esc_attr( $primary_color ) . ';" class="svl-button button btn-primary no-hover">View Demo</a>';
 			}
 
 			$html .= '			<img src="' . esc_url( $demo_image ) . '">';
@@ -197,6 +203,8 @@ if ( ! class_exists( 'Svl_Demo' ) ) {
 			$html .= '	        </span>';
 			$html .= '		</div>';
 			$html .= '	</div>';
+
+			$html .= '<style>.btn-primary{border-color:' . esc_attr( $primary_color ) . ';}</style>';
 
 			return $html;
 		}

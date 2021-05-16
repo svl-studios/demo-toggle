@@ -14,8 +14,11 @@
  */
 
 ( function( $ ) {
+	'use strict';
+
 	var adjustWrap;
 	var pageID;
+	var con  = $( '.svl-demos' );
 
 	function loadDemos() {
 		var div;
@@ -101,15 +104,21 @@
 	$( window ).on(
 		'load',
 		function() {
-			if ( $( 'body' ).hasClass( 'page-id-' + pageID ) ) {
-				$( '.svl-demos' ).randomizeDemos( '.demo-block' );
-				$( '.svl-demos' ).css( { visibility: 'visible' } );
-				setInterval(
-					function() {
-						$( '.svl-demos' ).randomizeDemos( '.demo-block' );
-					},
-					40000
-				);
+			var rand     = con.data( 'randomize' );
+			var interval = con.data( 'interval' );
+
+			if ( 'yes' === rand ) {
+				if ( $( 'body' ).hasClass( 'page-id-' + pageID ) ) {
+					$( '.svl-demos' ).randomizeDemos( '.demo-block' );
+					$( '.svl-demos' ).css( { visibility: 'visible' } );
+
+					setInterval(
+						function() {
+							$( '.svl-demos' ).randomizeDemos( '.demo-block' );
+						},
+						interval
+					);
+				}
 			}
 		}
 	);

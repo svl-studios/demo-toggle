@@ -52,3 +52,4 @@ Once the shortcodes have been added, the data will automataically be added to th
 * Colors are currently set via CSS.  I hope to make these options in the container shortcode in the future.
 * If you make changes to the JavaScript or CSS, don't forget to minify them or modify the enqueue functions to not use the minfied files.
 * This code will pass WordPress Coding Standards.  All output is escaped/sanitized.  If you discovere something I missed, please feel free to fork the project and submit a pull request.
+* This plugin uses Roboto Google Font (with Arial fallback) and Font Awesome 4.0+.  It is assumed these resources are already loaded.
