@@ -43,7 +43,7 @@ if ( ! class_exists( 'Svl_Demo_Toggle' ) ) {
 		 * Svl_Demo_Toggle constructor.
 		 */
 		public function __construct() {
-			require_once plugin_dir_path( __FILE__ ) . '/php-colors.php';
+			require_once plugin_dir_path( __FILE__ ) . '/class-color.php';
 			require_once plugin_dir_path( __FILE__ ) . '/class-svl-demos.php';
 			require_once plugin_dir_path( __FILE__ ) . '/class-svl-demo.php';
 
