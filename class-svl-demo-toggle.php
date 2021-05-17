@@ -77,6 +77,13 @@ if ( ! class_exists( 'Svl_Demo_Toggle' ) ) {
 					'pageID'  => get_the_ID(),
 				)
 			);
+
+			wp_enqueue_style(
+				'svl-demo-google-fonts',
+				'//fonts.googleapis.com/css?family=Roboto:400,100,300&display=fallback',
+				array(),
+				'1.0.0'
+			);
 		}
 	}
 

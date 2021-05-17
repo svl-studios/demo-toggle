@@ -1,3 +1,41 @@
+.fa.fa-plus:before {
+    content: "\f067";
+}
+
+.fa.fa-refresh:before {
+    content: "\f021"
+}
+
+.fa-spin {
+    -webkit-animation: fa-spin 2s linear infinite;
+    animation: fa-spin 2s linear infinite
+}
+
+.fa,
+.fas {
+    font-weight: 900;
+}
+.fa,
+.far,
+.fas {
+    font-family: "Font Awesome 5 Free";
+}
+
+.fa,
+.fab,
+.fad,
+.fal,
+.far,
+.fas {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
 .svl-demo-select-wrap .loading-demos {
     color: #fff;
     font-size: 20px
