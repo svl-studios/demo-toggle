@@ -6,7 +6,7 @@
  * I put this demo toggle code into a GitHub repository.  You're welcome to fork it, modify it, use it, whatever.
  * I only ask you leave this message, the repository link, and the credits intact.
  *
- * https://github.com/svl-studios/svl-demo-toggle
+ * - https://github.com/svl-studios/svl-demo-toggle
  *
  * Enjoy!
  *
@@ -17,8 +17,7 @@
 	'use strict';
 
 	var adjustWrap;
-	var pageID;
-	var con  = $( '.svl-demos' );
+	var con = $( '.svl-demos' );
 
 	function loadDemos() {
 		var div;
@@ -28,7 +27,6 @@
 		wrap.removeClass( 'init-onload' );
 
 		theme = wrap.data( 'theme' );
-		pageID = wrap.data( 'id' );
 
 		div = $( '<div>' );
 		div.load(
@@ -108,7 +106,7 @@
 			var interval = con.data( 'interval' );
 
 			if ( 'yes' === rand ) {
-				if ( $( 'body' ).hasClass( 'page-id-' + pageID ) ) {
+				if ( $( 'body' ).hasClass( 'page-id-' + svlDemoOptions.pageID ) ) {
 					$( '.svl-demos' ).randomizeDemos( '.demo-block' );
 					$( '.svl-demos' ).css( { visibility: 'visible' } );
 
