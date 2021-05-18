@@ -204,8 +204,6 @@ if ( ! class_exists( 'Svl_Demo' ) ) {
 			$html .= '		</div>';
 			$html .= '	</div>';
 
-			$html .= '<style>.svl-coming-soon .demo-wrap::after{color:' . esc_attr( $svl_demos->coming_soon_text_color ) . ';background-color:' . esc_attr( $svl_demos->coming_soon_color ) . ';}.btn-primary{border-color:' . esc_attr( $primary_color ) . ';}</style>';
-
 			return $html;
 		}
 	}

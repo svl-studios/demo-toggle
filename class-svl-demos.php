@@ -202,12 +202,9 @@ if ( ! class_exists( 'Svl_Demos' ) ) {
 				</div>
 			</div>
 
-			<?php if ( '' !== $this->primary_color ) { ?>
-				<style>
-					.svl-demo-toggle:hover{color: <?php echo esc_attr( $this->primary_color ); ?> !important;}
-				</style>
-				<?php
-			}
+			<style>.svl-demo-toggle:hover{color: <?php echo esc_attr( $this->primary_color ); ?> !important;}.svl-coming-soon .demo-wrap::after{color:<?php echo esc_attr( $this->coming_soon_text_color ); ?>;background-color:<?php echo esc_attr( $this->coming_soon_color ); ?>;}.btn-primary{border-color:<?php echo esc_attr( $this->primary_color ); ?>;}</style>
+			<?php
+
 		}
 
 		/**
